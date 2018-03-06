@@ -5,6 +5,7 @@
  */
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class Config {
 
     public int year;
     public int month;
-
+    public List<Config> configList = new ArrayList<>();
     public String inputlanguage;
     public String outputlanguage;
 
@@ -30,7 +31,7 @@ public class Config {
     }
 
     public Config saveConfigFromFile(Config config, List<String> configData) {
-        
+
         //año
         int year = Integer.valueOf(configData.get(0));
         //mes
@@ -39,11 +40,21 @@ public class Config {
         String inputLang = configData.get(2);
         //outputLanguage
         String outLang = configData.get(3);
-        
+
         //creamos el objeto del tipo config
         config = new Config(year, month, inputLang, outLang);
 
+        configList.add(config);
+
         return config;
+    }
+
+    public List<Config> getConfigList() {
+        if (configList.isEmpty()) {
+            return null;
+        } else {
+            return configList;
+        }
     }
 
     public int getYear() {
