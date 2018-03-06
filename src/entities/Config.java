@@ -16,10 +16,11 @@ public class Config {
 
     public int year;
     public int month;
-    public List<Config> configList = new ArrayList<>();
     public String inputlanguage;
     public String outputlanguage;
 
+    // public List<Config> configList = new ArrayList<>();
+    
     public Config() {
     }
 
@@ -44,18 +45,18 @@ public class Config {
         //creamos el objeto del tipo config
         config = new Config(year, month, inputLang, outLang);
 
-        configList.add(config);
+        //configList.add(config);
 
         return config;
     }
 
-    public List<Config> getConfigList() {
+    /*public List<Config> getConfigList() {
         if (configList.isEmpty()) {
             return null;
         } else {
             return configList;
         }
-    }
+    }*/
 
     public int getYear() {
         return year;

@@ -1,6 +1,12 @@
 package entities;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -15,6 +21,9 @@ public class Request {
     public String days;
     public String hours;
 
+    //array list para guardar peticiones
+    private List<Request> requestList = new ArrayList<>();
+
     public Request() {
     }
 
@@ -26,7 +35,56 @@ public class Request {
         this.days = days;
         this.hours = hours;
     }
-    
+
+    public Request saveRequestFromFile(Request request, List<String> requestList) {
+
+        //estado de la sala
+        String name = requestList.get(0);
+        //numero de sala
+        String lobby = requestList.get(1);
+        //fecha entrada
+        Date startReserve = StringToDate(requestList.get(2));
+        //fecha salida
+        Date endReserve = StringToDate(requestList.get(3));
+        //dias
+        String days = requestList.get(4);
+        //horas
+        String horas = requestList.get(5);
+
+        request = new Request(name, lobby, startReserve, endReserve, days, horas);
+
+        this.requestList.add(request);
+
+        return request;
+    }
+
+    public List<Request> getRequestList() {
+        
+        if (!requestList.isEmpty()) {
+            return requestList;
+        } else {
+            return null;
+        }
+
+    }
+
+    private Date StringToDate(String dateText) {
+        Date newDate = new Date();
+
+        //formato en el que queremos la fecha
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+
+        try {
+            Date date = formatter.parse(dateText);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return newDate;
+    }
+
     public String getName() {
         return name;
     }
